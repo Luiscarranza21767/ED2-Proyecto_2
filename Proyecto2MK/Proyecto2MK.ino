@@ -41,13 +41,13 @@ const int yp1init = 95;
 //#define LCD_DC PD_1
 //#define LCD_CS PA_3
 
-int P1_leftState = 1;
-int P1_upState = 1;
-int P1_downState = 1;
-int P1_rightState = 1;
+boolean P1_leftState = 1;
+boolean P1_upState = 1;
+boolean P1_downState = 1;
+boolean P1_rightState = 1;
 
 int xp1 = 0;
-int P1_lr = 0;                   // Variable para comparar dirección de p1 (1-left 0-right)
+boolean P1_lr = 0;                   // Variable para comparar dirección de p1 (1-left 0-right)
 
 File myFile;
 
@@ -202,6 +202,7 @@ void loop() {
   }
 }
 
+// Función para convertir de ascii a hexadecimal
 int asciitohex(int val){
   switch(val){
     case(48):
@@ -240,39 +241,39 @@ int asciitohex(int val){
     }
   }
 
-  void mapeo_SD(char document[]){
-    //digitalWrite(SD_CS, LOW);
-    myFile = SD.open(document);
-    int hex1 = 0;
-    int val1 = 0;
-    int val2 = 0;
-    int mapear = 0;
-    int vertical = 0;
-    unsigned char maps[640];
-    if(myFile){
-      while(myFile.available()){
-        mapear = 0;
-        while(mapear<640){
-          hex1 = myFile.read();
-          if(hex1 == 120){
-            val1 = myFile.read();
-            val2 = myFile.read();
-            val1 = asciitohex(val1);
-            val2 = asciitohex(val2);
-            maps[mapear] = val1*16 + val2;
-            mapear++;
-            }
+// Función para mapear imágenes de la SD
+void mapeo_SD(char document[]){
+  //digitalWrite(SD_CS, LOW);
+  myFile = SD.open(document);
+  int hex1 = 0;
+  int val1 = 0;
+  int val2 = 0;
+  int mapear = 0;
+  int vertical = 0;
+  unsigned char maps[640];
+  if(myFile){
+    while(myFile.available()){
+      mapear = 0;
+      while(mapear<640){
+        hex1 = myFile.read();
+        if(hex1 == 120){
+          val1 = myFile.read();
+          val2 = myFile.read();
+          val1 = asciitohex(val1);
+          val2 = asciitohex(val2);
+          maps[mapear] = val1*16 + val2;
+          mapear++;
           }
-          //digitalWrite(SD_CS, HIGH);
-          LCD_Bitmap(0, vertical, 320, 1, maps);
-          //digitalWrite(SD_CS, LOW);
-          vertical++;
         }
-        myFile.close();
+        //digitalWrite(SD_CS, HIGH);
+        LCD_Bitmap(0, vertical, 320, 1, maps);
+        //digitalWrite(SD_CS, LOW);
+        vertical++;
       }
-    else{
-      Serial.println("No se pudo abrir la imagen");
       myFile.close();
-        }
-    //digitalWrite(SD_CS, HIGH);  
     }
+  else{
+    Serial.println("No se pudo abrir la imagen");
+    myFile.close();
+      } 
+  }
