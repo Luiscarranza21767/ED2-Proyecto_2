@@ -41,8 +41,8 @@ int P1_downState = 1;
 int P1_rightState = 1;
 
 int xp1 = 0;
-int P1_comp_left = 0;                   // Variable para comparar posición del jugador 1
-int P1_comp_right = 39;                 // Variable para comparar posición del jugador 1
+int P1_lr = 0;                   // Variable para comparar dirección de p1 (1-left 2-right)
+
 //***************************************************************************************************************************************
 // Inicialización
 //***************************************************************************************************************************************
@@ -99,6 +99,7 @@ void loop() {
   extern uint8_t Scorpion_Walking[];
   extern uint8_t Scorpion_Jumping[];
   if(P1_rightState == LOW){
+    P1_lr = 0;
     // Si superó el límite redibuja la última parte
     if(xp1 >= 280){
 //      FillRect(276, 102, 45, 77, Backcolor);
@@ -124,6 +125,7 @@ void loop() {
   }
   
   if(P1_leftState == LOW){
+    P1_lr = 1;          // Dirección izquierda
     if(xp1 <= 0){
       xp1 = 0;
       delay(15);
@@ -144,11 +146,30 @@ void loop() {
     LCD_Sprite(xp1, 102, 39, 77, Scorpion_Walking, 5, anim1, 1, 0);
     
     }
+    
   if(P1_upState == LOW){
     int anim1y;
-    for (int yp1 = 0; yp1 <= 4; yp1++){ 
-      anim1y = (yp1/15)%2;
-      LCD_Sprite(xp1, 102 - yp1, 40, 77, Scorpion_Jumping, 7, anim1y, 2, 0);
+    if (!P1_lr){
+      for (int yp1 = 1; yp1 <= 7; yp1++){ 
+        delay(25);
+        if((yp1 == 3) || (yp1 == 4) ||(yp1 == 5)){
+          LCD_Sprite(xp1, 102 - yp1, 40, 77, Scorpion_Jumping, 7, yp1, 0, 0);
+          }
+        else{
+          LCD_Sprite(xp1, 102, 40, 77, Scorpion_Jumping, 7, yp1, 0, 0);
+          }
+        }
+      }
+    else{
+      for (int yp1 = 1; yp1 <= 7; yp1++){ 
+        delay(25);
+        if((yp1 == 3) || (yp1 == 4) ||(yp1 == 5)){
+          LCD_Sprite(xp1, 102 - yp1, 40, 77, Scorpion_Jumping, 7, yp1, 1, 0);
+          }
+        else{
+          LCD_Sprite(xp1, 102, 40, 77, Scorpion_Jumping, 7, yp1, 1, 0);
+          }
       }
     }
+  }
 }
