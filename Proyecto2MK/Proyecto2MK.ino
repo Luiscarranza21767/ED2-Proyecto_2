@@ -118,7 +118,7 @@ void loop() {
       V_line(xp1-i, 101, 77, Backcolor);
     }
     // Animación del jugador
-    int anim1 = (xp1/15)%2;
+    int anim1 = (xp1/17)%5;
     LCD_Sprite(xp1, 102, 39, 77, Scorpion_Walking, 5, anim1, 0, 0);
     
     
@@ -142,7 +142,7 @@ void loop() {
     for (int i = 39; i <= 43; i++){
     V_line(xp1+i, 101, 77, Backcolor);
     }
-    int anim1 = (xp1/15)%2;
+    int anim1 = (xp1/17)%5;
     LCD_Sprite(xp1, 102, 39, 77, Scorpion_Walking, 5, anim1, 1, 0);
     
     }
@@ -151,6 +151,11 @@ void loop() {
     int anim1y;
     if (!P1_lr){
       for (int yp1 = 1; yp1 <= 7; yp1++){ 
+        if(P1_rightState == LOW){
+          if(xp1 < 280){
+          xp1+=5;
+          }
+        }
         delay(25);
         if((yp1 == 3) || (yp1 == 4) ||(yp1 == 5)){
           LCD_Sprite(xp1, 102 - yp1, 40, 77, Scorpion_Jumping, 7, yp1, 0, 0);
@@ -158,16 +163,27 @@ void loop() {
         else{
           LCD_Sprite(xp1, 102, 40, 77, Scorpion_Jumping, 7, yp1, 0, 0);
           }
+        for(int i = 1; i<=5; i++){
+          V_line(xp1-i, 101, 77, Backcolor);
+          }  
         }
       }
     else{
       for (int yp1 = 1; yp1 <= 7; yp1++){ 
+        if(P1_leftState == LOW){
+          if(xp1 > 0){
+          xp1-=5;
+          }
+        }
         delay(25);
         if((yp1 == 3) || (yp1 == 4) ||(yp1 == 5)){
-          LCD_Sprite(xp1, 102 - yp1, 40, 77, Scorpion_Jumping, 7, yp1, 1, 0);
+          LCD_Sprite(xp1, 102 - yp1*2, 40, 77, Scorpion_Jumping, 7, yp1, 1, 0);
           }
         else{
           LCD_Sprite(xp1, 102, 40, 77, Scorpion_Jumping, 7, yp1, 1, 0);
+          }
+        for (int i = 39; i <= 43; i++){
+          V_line(xp1+i, 101, 77, Backcolor);
           }
       }
     }
