@@ -52,7 +52,7 @@ boolean P1_lr = 0;                   // Variable para comparar dirección de p1 
 File myFile;
 
 int asciitohex(int val);
-void mapeo_SD(char document[]);
+void mapeo_SD(char document[], int width, int x0, int y0);
 //***************************************************************************************************************************************
 // Inicialización
 //***************************************************************************************************************************************
@@ -81,7 +81,7 @@ void setup() {
   delay(500);
 
   // Dibujar el fondo del juego (Ignorar el nombre xd)
-  mapeo_SD("Luffy1.txt");
+  mapeo_SD("Luffy1.txt", 320, 0, 0);
   
 }
 //***************************************************************************************************************************************
@@ -93,6 +93,8 @@ void loop() {
   P1_leftState = digitalRead(P1_left);
   P1_rightState = digitalRead(P1_right);
   P1_upState = digitalRead(P1_up);
+  P1_downState = digitalRead(P1_down);
+  
   extern uint8_t Scorpion_Walking[];
   extern uint8_t Scorpion_Jumping[];
 
@@ -200,6 +202,17 @@ void loop() {
       }
     }
   }
+  if(P1_downState == LOW){
+    // Revisa si el jugador se dirigía a la izquierda o derecha
+    if (!P1_lr){
+        delay(15);
+        // En las animaciones 3, 4 y 5 incrementa también la posición en y
+        LCD_Sprite(xp1, yp1init, 40, 77, Scorpion_Jumping, 7, 1, 0, 0);
+        // Dibuja la línea que borra el rastro del jugador
+        V_line(xp1-1, yp1init, 77, Backcolor);
+        V_line(xp1+40, yp1init, 77, Backcolor);   
+        }
+      }
 }
 
 // Función para convertir de ascii a hexadecimal
@@ -242,19 +255,20 @@ int asciitohex(int val){
   }
 
 // Función para mapear imágenes de la SD
-void mapeo_SD(char document[]){
+void mapeo_SD(char document[], int width, int x0, int y0){
   //digitalWrite(SD_CS, LOW);
   myFile = SD.open(document);
   int hex1 = 0;
   int val1 = 0;
   int val2 = 0;
   int mapear = 0;
-  int vertical = 0;
-  unsigned char maps[640];
+  //int vertical = 0;
+  width = width*2;
+  unsigned char maps[width];
   if(myFile){
     while(myFile.available()){
       mapear = 0;
-      while(mapear<640){
+      while(mapear<width){
         hex1 = myFile.read();
         if(hex1 == 120){
           val1 = myFile.read();
@@ -265,10 +279,8 @@ void mapeo_SD(char document[]){
           mapear++;
           }
         }
-        //digitalWrite(SD_CS, HIGH);
-        LCD_Bitmap(0, vertical, 320, 1, maps);
-        //digitalWrite(SD_CS, LOW);
-        vertical++;
+        LCD_Bitmap(x0, y0, (width/2), 1, maps);
+        y0++;
       }
       myFile.close();
     }
