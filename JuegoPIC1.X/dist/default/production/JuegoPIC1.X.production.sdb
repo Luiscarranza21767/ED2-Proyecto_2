@@ -1,0 +1,216 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F887 ]
+[d frameptr 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"50 D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+[v _isr isr `II(v  1 e 1 0 ]
+"102
+[v _main main `(v  1 e 1 0 ]
+"114
+[v _setup setup `(v  1 e 1 0 ]
+"143
+[v _initUART initUART `(v  1 e 1 0 ]
+"10 D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+[v _setupINTOSC setupINTOSC `(v  1 e 1 0 ]
+"229 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+[s S56 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"246
+[u S65 . 1 `S56 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES65  1 e 1 @6 ]
+[s S83 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"483
+[s S92 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 TMR0IE 1 0 :1:5 
+]
+[u S97 . 1 `S83 1 . 1 0 `S92 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES97  1 e 1 @11 ]
+[s S310 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"554
+[u S318 . 1 `S310 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES318  1 e 1 @12 ]
+[s S245 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"1069
+[s S254 . 1 `uc 1 RCD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 RC9 1 0 :1:6 
+]
+[s S258 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 nRC8 1 0 :1:6 
+]
+[s S261 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RC8_9 1 0 :1:6 
+]
+[u S264 . 1 `S245 1 . 1 0 `S254 1 . 1 0 `S258 1 . 1 0 `S261 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES264  1 e 1 @24 ]
+"1134
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+[s S181 . 1 `uc 1 PS 1 0 :3:0 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+`uc 1 INTEDG 1 0 :1:6 
+`uc 1 nRBPU 1 0 :1:7 
+]
+"1367
+[s S188 . 1 `uc 1 PS0 1 0 :1:0 
+`uc 1 PS1 1 0 :1:1 
+`uc 1 PS2 1 0 :1:2 
+]
+[u S192 . 1 `S181 1 . 1 0 `S188 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES192  1 e 1 @129 ]
+"1479
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+[s S22 . 1 `uc 1 SCS 1 0 :1:0 
+`uc 1 LTS 1 0 :1:1 
+`uc 1 HTS 1 0 :1:2 
+`uc 1 OSTS 1 0 :1:3 
+`uc 1 IRCF 1 0 :3:4 
+]
+"1883
+[s S28 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 IRCF0 1 0 :1:4 
+`uc 1 IRCF1 1 0 :1:5 
+`uc 1 IRCF2 1 0 :1:6 
+]
+[u S33 . 1 `S22 1 . 1 0 `S28 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES33  1 e 1 @143 ]
+[s S129 . 1 `uc 1 WPUB 1 0 :8:0 
+]
+"2367
+[s S131 . 1 `uc 1 WPUB0 1 0 :1:0 
+`uc 1 WPUB1 1 0 :1:1 
+`uc 1 WPUB2 1 0 :1:2 
+`uc 1 WPUB3 1 0 :1:3 
+`uc 1 WPUB4 1 0 :1:4 
+`uc 1 WPUB5 1 0 :1:5 
+`uc 1 WPUB6 1 0 :1:6 
+`uc 1 WPUB7 1 0 :1:7 
+]
+[u S140 . 1 `S129 1 . 1 0 `S131 1 . 1 0 ]
+[v _WPUBbits WPUBbits `VES140  1 e 1 @149 ]
+[s S155 . 1 `uc 1 IOCB 1 0 :8:0 
+]
+"2437
+[s S157 . 1 `uc 1 IOCB0 1 0 :1:0 
+`uc 1 IOCB1 1 0 :1:1 
+`uc 1 IOCB2 1 0 :1:2 
+`uc 1 IOCB3 1 0 :1:3 
+`uc 1 IOCB4 1 0 :1:4 
+`uc 1 IOCB5 1 0 :1:5 
+`uc 1 IOCB6 1 0 :1:6 
+`uc 1 IOCB7 1 0 :1:7 
+]
+[u S166 . 1 `S155 1 . 1 0 `S157 1 . 1 0 ]
+[v _IOCBbits IOCBbits `VES166  1 e 1 @150 ]
+[s S208 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"2583
+[s S217 . 1 `uc 1 TXD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 nTX8 1 0 :1:6 
+]
+[s S221 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[u S224 . 1 `S208 1 . 1 0 `S217 1 . 1 0 `S221 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES224  1 e 1 @152 ]
+"2643
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+[s S289 . 1 `uc 1 ABDEN 1 0 :1:0 
+`uc 1 WUE 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 BRG16 1 0 :1:3 
+`uc 1 SCKP 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 RCIDL 1 0 :1:6 
+`uc 1 ABDOVF 1 0 :1:7 
+]
+"3353
+[u S298 . 1 `S289 1 . 1 0 ]
+[v _BAUDCTLbits BAUDCTLbits `VES298  1 e 1 @391 ]
+"3388
+[v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
+"3450
+[v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"4135
+[v _RBIF RBIF `VEb  1 e 0 @88 ]
+"39 D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+[v _accion accion `uc  1 e 1 0 ]
+"102
+[v _main main `(v  1 e 1 0 ]
+{
+"109
+} 0
+"10 D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+[v _setupINTOSC setupINTOSC `(v  1 e 1 0 ]
+{
+[v setupINTOSC@IRCF IRCF `uc  1 a 1 wreg ]
+[v setupINTOSC@IRCF IRCF `uc  1 a 1 wreg ]
+[v setupINTOSC@IRCF IRCF `uc  1 a 1 3 ]
+"37
+} 0
+"114 D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+[v _setup setup `(v  1 e 1 0 ]
+{
+"138
+} 0
+"143
+[v _initUART initUART `(v  1 e 1 0 ]
+{
+"156
+} 0
+"50
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"98
+} 0

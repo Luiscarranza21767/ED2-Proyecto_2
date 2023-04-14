@@ -50,7 +50,7 @@ int xp1 = 0;
 boolean P1_lr = 0;                   // Variable para comparar dirección de p1 (1-left 0-right)
 
 File myFile;
-
+int P1serial;
 int asciitohex(int val);
 void mapeo_SD(char document[], int width, int x0, int y0);
 //***************************************************************************************************************************************
@@ -74,7 +74,7 @@ void setup() {
     return;
     }
     Serial.println("Inicialización completa");
-  
+  Serial2.begin(9600);
   // Iniciar la comunicación con la pantalla
   LCD_Init();
   LCD_Clear(0x00);
@@ -88,12 +88,31 @@ void setup() {
 // Loop Infinito
 //***************************************************************************************************************************************
 void loop() {
-
+  P1serial = Serial2.read();
+  if(P1serial == 1){
+    P1_leftState = LOW;
+    }
+  if(P1serial == 2){
+    P1_upState = LOW;
+    }
+  if(P1serial == 3){
+    P1_rightState = LOW;
+    }
+  if(P1serial == 4){
+    
+    }
+  if(P1serial == 6){
+    P1_leftState = HIGH;
+    P1_rightState = HIGH;
+    P1_upState = HIGH;
+    P1_downState = HIGH;
+    }
+    
   // Variables para el control del jugador 1
-  P1_leftState = digitalRead(P1_left);
-  P1_rightState = digitalRead(P1_right);
-  P1_upState = digitalRead(P1_up);
-  P1_downState = digitalRead(P1_down);
+//  P1_leftState = digitalRead(P1_left);
+//  P1_rightState = digitalRead(P1_right);
+//  P1_upState = digitalRead(P1_up);
+//  P1_downState = digitalRead(P1_down);
   
   extern uint8_t Scorpion_Walking[];
   extern uint8_t Scorpion_Jumping[];
