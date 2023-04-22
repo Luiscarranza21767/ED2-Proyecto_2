@@ -14,16 +14,16 @@
 $dist/default/production\JuegoPIC1.X.production.o
 cinit CODE 0 F F 5 2 1
 idloc IDLOC 5 2000 2000 4 2 1
-text1 CODE 0 14 14 5F 2 1
-text2 CODE 0 D0 D0 1A 2 1
-text3 CODE 0 EA EA 16 2 1
-text4 CODE 0 73 73 5D 2 1
-maintext CODE 0 100 100 14 2 1
+text1 CODE 0 85 85 5F 2 1
+text2 CODE 0 E4 E4 1E 2 1
+text3 CODE 0 102 102 16 2 1
+text4 CODE 0 14 14 71 2 1
+maintext CODE 0 118 118 14 2 1
 cstackCOMMON COMMON 1 70 70 4 1 1
 intentry CODE 0 4 4 8 2 1
 bssCOMMON COMMON 1 74 74 1 1 1
 config CONFIG 4 2007 2007 2 2 1
-$C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
+$C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
 idloc IDLOC 5 2000 2000 4 2 1
 reset_vec CODE 0 0 0 3 2 1
 end_init CODE 0 C C 3 2 1
@@ -43,11 +43,11 @@ BANK1 A0-EF 1
 BANK2 110-16F 1
 BANK3 190-1EF 1
 CONST 3-3 2
-CONST 114-1FFF 2
+CONST 12C-1FFF 2
 ENTRY 3-3 2
-ENTRY 114-1FFF 2
+ENTRY 12C-1FFF 2
 CODE 3-3 2
-CODE 114-1FFF 2
+CODE 12C-1FFF 2
 SFR0 0-1F 1
 SFR1 80-9F 1
 SFR2 100-10F 1
@@ -55,9 +55,9 @@ SFR3 180-18F 1
 COMMON 75-7D 1
 EEDATA 2100-21FF 2
 STRCODE 3-3 2
-STRCODE 114-1FFF 2
+STRCODE 12C-1FFF 2
 STRING 3-3 2
-STRING 114-1FFF 2
+STRING 12C-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -72,102 +72,113 @@ STRING 114-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\JuegoPIC1.X.production.o
-F cinit CODE >621:C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.s
-F cinit CODE >624:C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.s
-F cinit CODE >635:C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.s
-10 cinit CODE >641:C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.s
-10 cinit CODE >643:C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.s
-11 cinit CODE >644:C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.s
+F cinit CODE >621:C:\Users\Pablo\AppData\Local\Temp\xcAsau4.s
+F cinit CODE >624:C:\Users\Pablo\AppData\Local\Temp\xcAsau4.s
+F cinit CODE >635:C:\Users\Pablo\AppData\Local\Temp\xcAsau4.s
+10 cinit CODE >641:C:\Users\Pablo\AppData\Local\Temp\xcAsau4.s
+10 cinit CODE >643:C:\Users\Pablo\AppData\Local\Temp\xcAsau4.s
+11 cinit CODE >644:C:\Users\Pablo\AppData\Local\Temp\xcAsau4.s
 4 intentry CODE >50:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-73 text4 CODE >50:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-73 text4 CODE >53:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-77 text4 CODE >54:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-7D text4 CODE >55:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-84 text4 CODE >58:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-86 text4 CODE >59:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-87 text4 CODE >60:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-8B text4 CODE >62:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-8C text4 CODE >63:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-90 text4 CODE >64:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-97 text4 CODE >67:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-99 text4 CODE >68:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-9A text4 CODE >69:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-9E text4 CODE >71:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-9F text4 CODE >73:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-A3 text4 CODE >74:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-AA text4 CODE >77:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-AC text4 CODE >78:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-AD text4 CODE >79:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-B1 text4 CODE >81:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-B2 text4 CODE >83:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-B6 text4 CODE >84:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-BD text4 CODE >87:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-BF text4 CODE >88:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-C0 text4 CODE >89:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-C4 text4 CODE >91:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-C5 text4 CODE >93:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-C7 text4 CODE >94:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-C9 text4 CODE >98:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-EA text3 CODE >143:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-EA text3 CODE >145:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-EE text3 CODE >147:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-EF text3 CODE >148:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-F2 text3 CODE >150:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-F5 text3 CODE >151:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-F8 text3 CODE >153:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-FB text3 CODE >154:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-FE text3 CODE >155:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-FF text3 CODE >156:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-D0 text2 CODE >114:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-D0 text2 CODE >116:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-D3 text2 CODE >117:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-D4 text2 CODE >118:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-D8 text2 CODE >119:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-DB text2 CODE >121:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-DC text2 CODE >122:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-DD text2 CODE >123:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-DE text2 CODE >125:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-E1 text2 CODE >126:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-E2 text2 CODE >127:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-E3 text2 CODE >128:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-E4 text2 CODE >129:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-E5 text2 CODE >130:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-E6 text2 CODE >131:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-E7 text2 CODE >132:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-E8 text2 CODE >134:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-E9 text2 CODE >138:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-14 text1 CODE >10:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-15 text1 CODE >11:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-1B text1 CODE >12:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-1F text1 CODE >13:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-1F text1 CODE >14:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-25 text1 CODE >15:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-2B text1 CODE >16:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-2B text1 CODE >17:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-31 text1 CODE >18:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-37 text1 CODE >19:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-37 text1 CODE >20:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-3D text1 CODE >21:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-43 text1 CODE >22:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-43 text1 CODE >23:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-49 text1 CODE >24:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-4F text1 CODE >25:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-4F text1 CODE >26:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-55 text1 CODE >27:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-5B text1 CODE >28:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-5B text1 CODE >29:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-60 text1 CODE >30:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-66 text1 CODE >31:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-66 text1 CODE >32:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-6B text1 CODE >33:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-6F text1 CODE >36:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-72 text1 CODE >37:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
-100 maintext CODE >102:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-100 maintext CODE >103:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-106 maintext CODE >104:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-10B maintext CODE >105:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-110 maintext CODE >106:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
-110 maintext CODE >108:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+14 text4 CODE >50:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+14 text4 CODE >53:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+18 text4 CODE >63:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+1E text4 CODE >64:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+25 text4 CODE >67:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+27 text4 CODE >68:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+28 text4 CODE >69:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+2C text4 CODE >71:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+2D text4 CODE >73:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+31 text4 CODE >74:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+38 text4 CODE >77:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+3A text4 CODE >78:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+3B text4 CODE >79:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+3F text4 CODE >81:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+40 text4 CODE >83:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+44 text4 CODE >84:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+4B text4 CODE >87:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+4D text4 CODE >88:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+4E text4 CODE >89:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+52 text4 CODE >91:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+53 text4 CODE >92:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+57 text4 CODE >93:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+5E text4 CODE >96:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+60 text4 CODE >97:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+61 text4 CODE >98:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+65 text4 CODE >100:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+66 text4 CODE >101:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+6A text4 CODE >102:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+71 text4 CODE >105:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+73 text4 CODE >106:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+74 text4 CODE >107:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+78 text4 CODE >109:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+79 text4 CODE >111:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+7B text4 CODE >112:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+7D text4 CODE >113:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+7E text4 CODE >117:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+102 text3 CODE >166:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+102 text3 CODE >168:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+106 text3 CODE >170:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+107 text3 CODE >171:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+10A text3 CODE >173:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+10D text3 CODE >174:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+110 text3 CODE >176:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+113 text3 CODE >177:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+116 text3 CODE >178:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+117 text3 CODE >179:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+E4 text2 CODE >133:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+E4 text2 CODE >135:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+E7 text2 CODE >136:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+E8 text2 CODE >137:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+EC text2 CODE >138:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+EF text2 CODE >140:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+F0 text2 CODE >141:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+F1 text2 CODE >142:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+F2 text2 CODE >144:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+F5 text2 CODE >145:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+F6 text2 CODE >146:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+F7 text2 CODE >147:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+F8 text2 CODE >148:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+F9 text2 CODE >149:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+FA text2 CODE >150:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+FB text2 CODE >151:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+FC text2 CODE >152:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+FD text2 CODE >153:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+FE text2 CODE >154:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+FF text2 CODE >155:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+100 text2 CODE >157:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+101 text2 CODE >161:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+85 text1 CODE >10:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+86 text1 CODE >11:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+8C text1 CODE >12:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+90 text1 CODE >13:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+90 text1 CODE >14:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+96 text1 CODE >15:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+9C text1 CODE >16:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+9C text1 CODE >17:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+A2 text1 CODE >18:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+A8 text1 CODE >19:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+A8 text1 CODE >20:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+AE text1 CODE >21:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+B4 text1 CODE >22:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+B4 text1 CODE >23:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+BA text1 CODE >24:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+C0 text1 CODE >25:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+C0 text1 CODE >26:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+C6 text1 CODE >27:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+CC text1 CODE >28:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+CC text1 CODE >29:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+D1 text1 CODE >30:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+D7 text1 CODE >31:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+D7 text1 CODE >32:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+DC text1 CODE >33:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+E0 text1 CODE >36:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+E3 text1 CODE >37:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\oscilador.c
+118 maintext CODE >121:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+118 maintext CODE >122:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+11E maintext CODE >123:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+123 maintext CODE >124:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+128 maintext CODE >125:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
+128 maintext CODE >127:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -181,7 +192,7 @@ E9 text2 CODE >138:D:\Backup\Documentos\GitHub\ED2-Proyecto_2\JuegoPIC1.X\main.c
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
 ___latbits 2 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
-__Hspace_0 114 0 ABS 0 - -
+__Hspace_0 12C 0 ABS 0 - -
 __Hspace_1 75 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
@@ -189,36 +200,36 @@ __Hspace_4 4010 0 ABS 0 - -
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
 _RBIF 58 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
-_main 200 0 CODE 0 maintext dist/default/production\JuegoPIC1.X.production.o
+___sp 0 0 STACK 2 stack C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
+_main 230 0 CODE 0 maintext dist/default/production\JuegoPIC1.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
-start 18 0 CODE 0 init C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
+start 18 0 CODE 0 init C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 _OPTION_REGbits 81 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
 __Hpowerup 0 0 CODE 0 powerup -
-intlevel0 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
-_setupINTOSC 28 0 CODE 0 text1 dist/default/production\JuegoPIC1.X.production.o
-_initUART 1D4 0 CODE 0 text3 dist/default/production\JuegoPIC1.X.production.o
+_setupINTOSC 10A 0 CODE 0 text1 dist/default/production\JuegoPIC1.X.production.o
+_initUART 204 0 CODE 0 text3 dist/default/production\JuegoPIC1.X.production.o
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
 __Hfunctab 0 0 ENTRY 0 functab -
 setupINTOSC@IRCF 73 0 COMMON 1 cstackCOMMON dist/default/production\JuegoPIC1.X.production.o
 __Hclrtext 0 0 ABS 0 clrtext -
-__end_of_initUART 200 0 CODE 0 text3 dist/default/production\JuegoPIC1.X.production.o
+__end_of_initUART 230 0 CODE 0 text3 dist/default/production\JuegoPIC1.X.production.o
 _ANSELH 189 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
-___stackhi 0 0 ABS 0 - C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
-___stacklo 0 0 ABS 0 - C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
+___stackhi 0 0 ABS 0 - C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
+___stacklo 0 0 ABS 0 - C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
 _BAUDCTLbits 187 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
 _WPUBbits 95 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
 start_initialization 1E 0 CODE 0 cinit dist/default/production\JuegoPIC1.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
+___int_sp 0 0 STACK 2 stack C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -255,18 +266,18 @@ __Lsfr2 0 0 ABS 0 sfr2 -
 __Lsfr3 0 0 ABS 0 sfr3 -
 __Ltext 0 0 ABS 0 text -
 __HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
-__S0 114 0 ABS 0 - -
+__S0 12C 0 ABS 0 - -
 __S1 75 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
-_isr E6 0 CODE 0 text4 dist/default/production\JuegoPIC1.X.production.o
+_isr 28 0 CODE 0 text4 dist/default/production\JuegoPIC1.X.production.o
 _accion 74 0 COMMON 1 bssCOMMON dist/default/production\JuegoPIC1.X.production.o
 saved_w 7E 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
-__end_of_setupINTOSC E6 0 CODE 0 text1 dist/default/production\JuegoPIC1.X.production.o
-__end_of_isr 1A0 0 CODE 0 text4 dist/default/production\JuegoPIC1.X.production.o
+__end_of_setupINTOSC 1C8 0 CODE 0 text1 dist/default/production\JuegoPIC1.X.production.o
+__end_of_isr 10A 0 CODE 0 text4 dist/default/production\JuegoPIC1.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\Pablo\AppData\Local\Temp\xcAsrs4.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\Pablo\AppData\Local\Temp\xcAsau4.o
 _RCSTAbits 18 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
-__pmaintext 200 0 CODE 0 maintext dist/default/production\JuegoPIC1.X.production.o
+__pmaintext 230 0 CODE 0 maintext dist/default/production\JuegoPIC1.X.production.o
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 0 0 CONFIG 4 config -
 __Lspace_0 0 0 ABS 0 - -
@@ -282,10 +293,10 @@ end_of_initialization 20 0 CODE 0 cinit dist/default/production\JuegoPIC1.X.prod
 __Hintentry 18 0 CODE 0 intentry -
 __Lstrings 0 0 ABS 0 strings -
 __Hreset_vec 6 0 CODE 0 reset_vec -
-__ptext1 28 0 CODE 0 text1 dist/default/production\JuegoPIC1.X.production.o
-__ptext2 1A0 0 CODE 0 text2 dist/default/production\JuegoPIC1.X.production.o
-__ptext3 1D4 0 CODE 0 text3 dist/default/production\JuegoPIC1.X.production.o
-__ptext4 E6 0 CODE 0 text4 dist/default/production\JuegoPIC1.X.production.o
+__ptext1 10A 0 CODE 0 text1 dist/default/production\JuegoPIC1.X.production.o
+__ptext2 1C8 0 CODE 0 text2 dist/default/production\JuegoPIC1.X.production.o
+__ptext3 204 0 CODE 0 text3 dist/default/production\JuegoPIC1.X.production.o
+__ptext4 28 0 CODE 0 text4 dist/default/production\JuegoPIC1.X.production.o
 __Lpowerup 0 0 CODE 0 powerup -
 __Leeprom_data 0 0 EEDATA 3 eeprom_data -
 __Lreset_vec 0 0 CODE 0 reset_vec -
@@ -295,18 +306,18 @@ __Lclrtext 0 0 ABS 0 clrtext -
 __pcstackCOMMON 70 0 COMMON 1 cstackCOMMON dist/default/production\JuegoPIC1.X.production.o
 _TXSTAbits 98 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
 __Hend_init 1E 0 CODE 0 end_init -
-__end_of_main 228 0 CODE 0 maintext dist/default/production\JuegoPIC1.X.production.o
+__end_of_main 258 0 CODE 0 maintext dist/default/production\JuegoPIC1.X.production.o
 _ANSEL 188 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
 _PORTB 6 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
 _SPBRG 99 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
 _TRISB 86 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
 _TXREG 19 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
-__end_of_setup 1D4 0 CODE 0 text2 dist/default/production\JuegoPIC1.X.production.o
+__end_of_setup 204 0 CODE 0 text2 dist/default/production\JuegoPIC1.X.production.o
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
 interrupt_function 8 0 CODE 0 intentry dist/default/production\JuegoPIC1.X.production.o
 _IOCBbits 96 0 ABS 0 - dist/default/production\JuegoPIC1.X.production.o
-_setup 1A0 0 CODE 0 text2 dist/default/production\JuegoPIC1.X.production.o
+_setup 1C8 0 CODE 0 text2 dist/default/production\JuegoPIC1.X.production.o
 __pintentry 8 0 CODE 0 intentry dist/default/production\JuegoPIC1.X.production.o
 __initialization 1E 0 CODE 0 cinit dist/default/production\JuegoPIC1.X.production.o
 # %SPLITSTAB Section
@@ -335,7 +346,7 @@ __initialization 1E 0 CODE 0 cinit dist/default/production\JuegoPIC1.X.productio
 # All other numeric quantities are in decimal.
 %SEGMENTS
 cstackCOMMON 1 70 70 5 1
-intentry 0 4 8 110 2
+intentry 0 4 8 128 2
 reset_vec 0 0 0 3 2
 # %NOTES Section
 # This section contains data of all the note-psects.  The beginning of the section

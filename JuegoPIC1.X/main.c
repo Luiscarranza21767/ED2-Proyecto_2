@@ -51,16 +51,16 @@ void __interrupt() isr(void){
    
     //VALORES A ENVIAR POR CADA BOTON
    	if (RBIF == 1){
-        if (PORTBbits.RB0 == 0){
-            __delay_ms(10);
-
-            //ACCION DEL PUERTO
-            accion = 1;  //ACCION: 
-            INTCONbits.RBIF = 0;
-            TXREG = accion;
-
-        }
-        else if (PORTBbits.RB1 == 0){
+//        if (PORTBbits.RB0 == 0){
+//            __delay_ms(10);
+//
+//            //ACCION DEL PUERTO
+//            accion = 1;  //ACCION: 
+//            INTCONbits.RBIF = 0;
+//            TXREG = accion;
+//
+//        }
+        if (PORTBbits.RB1 == 0){
             __delay_ms(10);
 
             //ACCION DEL PUERTO
@@ -89,9 +89,28 @@ void __interrupt() isr(void){
             TXREG = accion;
 
         }
+        else if (PORTBbits.RB4 == 0){
+            __delay_ms(10);
+
+            //ACCION DEL PUERTO
+            accion = 5; //ACCION: 
+            INTCONbits.RBIF = 0;
+            TXREG = accion;
+
+        }
+        else if (PORTBbits.RB5 == 0){
+            __delay_ms(10);
+
+            //ACCION DEL PUERTO
+            accion = 1; //ACCION: 
+            INTCONbits.RBIF = 0;
+            TXREG = accion;
+
+        }
         else{
             accion = 6;
             TXREG = accion;
+            INTCONbits.RBIF = 0;
         }
     
     }
@@ -115,7 +134,7 @@ void setup(void){
     //PUERTOS
     ANSEL = 0;
     ANSELH = 0;
-    TRISB = 0b00001111;
+    TRISB = 0b00111111;
     PORTB = 0;
     //Interrupciones
     INTCONbits.RBIE = 1; 
@@ -130,6 +149,10 @@ void setup(void){
     IOCBbits.IOCB2 = 1; //inputs RB2  
     WPUBbits.WPUB3 = 1; //inputs RB3
     IOCBbits.IOCB3 = 1; //inputs RB3
+    WPUBbits.WPUB4 = 1; //inputs RB4
+    IOCBbits.IOCB4 = 1; //inputs RB4
+    WPUBbits.WPUB5 = 1; //inputs RB4
+    IOCBbits.IOCB5 = 1; //inputs RB4
     //PULLUPS INTERNOS
     OPTION_REGbits.nRBPU = 0; //no RBPU, habilitan los pullups internos
     //I2C

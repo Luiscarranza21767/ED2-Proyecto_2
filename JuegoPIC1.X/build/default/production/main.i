@@ -2820,16 +2820,8 @@ void __attribute__((picinterrupt(("")))) isr(void){
 
 
     if (RBIF == 1){
-        if (PORTBbits.RB0 == 0){
-            _delay((unsigned long)((10)*(500000/4000.0)));
-
-
-            accion = 1;
-            INTCONbits.RBIF = 0;
-            TXREG = accion;
-
-        }
-        else if (PORTBbits.RB1 == 0){
+# 63 "main.c"
+        if (PORTBbits.RB1 == 0){
             _delay((unsigned long)((10)*(500000/4000.0)));
 
 
@@ -2858,9 +2850,28 @@ void __attribute__((picinterrupt(("")))) isr(void){
             TXREG = accion;
 
         }
+        else if (PORTBbits.RB4 == 0){
+            _delay((unsigned long)((10)*(500000/4000.0)));
+
+
+            accion = 5;
+            INTCONbits.RBIF = 0;
+            TXREG = accion;
+
+        }
+        else if (PORTBbits.RB5 == 0){
+            _delay((unsigned long)((10)*(500000/4000.0)));
+
+
+            accion = 1;
+            INTCONbits.RBIF = 0;
+            TXREG = accion;
+
+        }
         else{
             accion = 6;
             TXREG = accion;
+            INTCONbits.RBIF = 0;
         }
 
     }
@@ -2884,7 +2895,7 @@ void setup(void){
 
     ANSEL = 0;
     ANSELH = 0;
-    TRISB = 0b00001111;
+    TRISB = 0b00111111;
     PORTB = 0;
 
     INTCONbits.RBIE = 1;
@@ -2899,6 +2910,10 @@ void setup(void){
     IOCBbits.IOCB2 = 1;
     WPUBbits.WPUB3 = 1;
     IOCBbits.IOCB3 = 1;
+    WPUBbits.WPUB4 = 1;
+    IOCBbits.IOCB4 = 1;
+    WPUBbits.WPUB5 = 1;
+    IOCBbits.IOCB5 = 1;
 
     OPTION_REGbits.nRBPU = 0;
 

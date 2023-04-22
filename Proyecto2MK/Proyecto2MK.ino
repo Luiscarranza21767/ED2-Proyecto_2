@@ -33,6 +33,7 @@
 #define SD_CS PB_6
 const int Backcolor = 0x28c3;
 const int yp1init = 95;
+
 // El SPI es el 0
 //MOSI va a PA_5
 //MISO va a PA_4
@@ -41,13 +42,19 @@ const int yp1init = 95;
 //#define LCD_DC PD_1
 //#define LCD_CS PA_3
 
-boolean P1_leftState = 1;
-boolean P1_upState = 1;
-boolean P1_downState = 1;
-boolean P1_rightState = 1;
+int* P1_leftStatep;
+int* P1_upStatep;
+int* P1_rightStatep;
 
+int* xp1p;
+boolean* P1_lrp;                   // Variable para comparar dirección de p1 (1-left 0-right)
+
+int P1_leftState = 1;
+int P1_upState = 1;
+int P1_rightState = 1;
 int xp1 = 0;
-boolean P1_lr = 0;                   // Variable para comparar dirección de p1 (1-left 0-right)
+boolean P1_lr = 0;
+
 int iniciomenu = 0;
 int elegirmenu = 0;
 int posP2 = 0;
@@ -62,14 +69,24 @@ int asciitohex(int val);
 void mapeo_SD(char document[], int width, int height, int x0, int y0);
 void checkbuttonP1(void);
 void saveImage(char doc[]);
+void Playermov(int* rightStatep, int* leftStatep, int* upStatep, boolean* lrp, uint8_t Walking[], uint8_t Jumping[], int* xpp, int ypinit);
 
 extern uint8_t flecha[];
-
+extern uint8_t Scorpion_Walking[];
+extern uint8_t Scorpion_Jumping[];
+  
 //***************************************************************************************************************************************
 // Inicialización
 //***************************************************************************************************************************************
 void setup() {
+  
   SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_OSC_MAIN|SYSCTL_XTAL_16MHZ);
+  
+  P1_leftStatep = &P1_leftState;
+  P1_upStatep = &P1_upState;
+  P1_rightStatep = &P1_rightState;
+  xp1p = &xp1;
+  P1_lrp = &P1_lr;                   // Variable para comparar dirección de p1 (1-left 0-right)
   
   pinMode(P1_left, INPUT_PULLUP);
   pinMode(P1_up, INPUT_PULLUP);
@@ -110,7 +127,6 @@ void loop() {
   while (iniciomenu == 0){
       LCD_Sprite(108, 208, 10, 10, flecha, 2, 0, 0, 1);
       checkbuttonP1();
-      //Stleft = digitalRead(SWLEFT);
       if (P1_rightState == LOW || P1_leftState == LOW || P1_upState == LOW){
         iniciomenu = 1;
         elegirmenu = 1;
@@ -121,19 +137,18 @@ void loop() {
   
   while(elegirmenu == 1){
     LCD_Print("Choose your fighter", 10, 50, 2, 0xffff, 0x0000);
-    LCD_Print("Player 1", 30, 70, 2, 0xffff, 0x0000);
-    LCD_Bitmap(90, 100, 44, 44, scorpionpic);
-    LCD_Bitmap(200, 100, 44, 44, subzeropic);
+    LCD_Print("Player 1", 20, 80, 2, 0xffff, 0x0000);
+    LCD_Bitmap(90, 110, 44, 44, scorpionpic);
+    LCD_Bitmap(200, 110, 44, 44, subzeropic);
     
     while (P1done == 0){
-      verifposP1();
-      eleccionP1();
+      P1selection();
     }
     
     while (P2done == 0){
       LCD_Print("   Your fighters   ", 10, 50, 2, 0xffff, 0x0000);
-      LCD_Print("Player 2", 160, 70, 2, 0xffff, 0x0000);
-      verifposP2(); 
+      LCD_Print("Player 2", 180, 80, 2, 0xffff, 0x0000);
+      P2selection(); 
       P2done = 1; 
     }
     elegirmenu = 0;
@@ -143,129 +158,8 @@ void loop() {
   mapeo_SD("BackGam.txt", 320, 240, 0, 0);
   while (1){
     checkbuttonP1();  
+    Playermov(&P1_rightState, &P1_leftState, &P1_upState, &P1_lr, Scorpion_Walking, Scorpion_Jumping, &xp1, yp1init);
     
-    extern uint8_t Scorpion_Walking[];
-    extern uint8_t Scorpion_Jumping[];
-  
-    // Revisa si se presionó el control derecho del jugador 1
-    if(P1_rightState == LOW){
-      P1_lr = 0;
-      // Si superó el límite se queda en esa coordenada
-      if(xp1 >= 280){
-        xp1 = 280;
-        // Animación del borde de la pantalla
-        delay(15);
-        LCD_Sprite(xp1, yp1init, 39, 77, Scorpion_Walking, 5, 3, 0, 0);
-        delay(15);
-        LCD_Sprite(xp1, yp1init, 39, 77, Scorpion_Walking, 5, 5, 0, 0);
-        }
-      else{
-        xp1 += 5;
-        }
-      delay(15);
-      // Relleno de la parte que va dejando el jugador
-      for(int i = 1; i<=5; i++){
-        V_line(xp1-i, yp1init - 1, 77, Backcolor);
-      }
-      // Animación del jugador
-      int anim1 = (xp1/17)%5;
-      LCD_Sprite(xp1, yp1init, 39, 77, Scorpion_Walking, 5, anim1, 0, 0);
-    }
-  
-    // Revisa si se presionó el control izquierdo del jugador 1
-    if(P1_leftState == LOW){
-      P1_lr = HIGH;          // Dirección izquierda
-      // Revisa si llegó al borde de la pantalla
-      if(xp1 <= 0){
-        xp1 = 0;
-        // Animación en el borde de la pantalla
-        delay(15);
-        LCD_Sprite(xp1, yp1init, 39, 77, Scorpion_Walking, 5, 3, 1, 0);
-        delay(15);
-        LCD_Sprite(xp1, yp1init, 39, 77, Scorpion_Walking, 5, 5, 1, 0);
-        }
-      else{
-        xp1 -= 5;
-        }
-  
-      delay(15);
-      // Relleno para el rastro que deja el jugador
-      for (int i = 39; i <= 43; i++){
-      V_line(xp1+i, yp1init - 1, 77, Backcolor);
-      }
-      // Animación del jugador 1
-      int anim1 = (xp1/17)%5;
-      LCD_Sprite(xp1, yp1init, 39, 77, Scorpion_Walking, 5, anim1, 1, 0);
-      
-      }
-  
-    checkbuttonP1();   
-    // Revisa si presionó el botón de salto del jugador 1
-    if(P1_upState == LOW){
-      int anim1y;
-      // Revisa si el jugador se dirigía a la izquierda o derecha
-      if (!P1_lr){
-        // Incrementa variable para la animación
-        for (int yp1 = 1; yp1 <= 7; yp1++){ 
-          // Revisa si al mismo tiempo se presionó el botón del movimiento a la deracha
-          if(P1_rightState == LOW){
-            // Si lo hizo entonces también aumenta la coordenada en xp1
-            if(xp1 < 280){
-            xp1+=5;
-            }
-          }
-          delay(25);
-          // En las animaciones 3, 4 y 5 incrementa también la posición en y
-          if((yp1 == 3) || (yp1 == 4) ||(yp1 == 5)){
-            LCD_Sprite(xp1, yp1init - yp1*2, 40, 77, Scorpion_Jumping, 7, yp1, 0, 0);
-            }
-          else{
-            LCD_Sprite(xp1, yp1init, 40, 77, Scorpion_Jumping, 7, yp1, 0, 0);
-            }
-          // Dibuja la línea que borra el rastro del jugador
-          for(int i = 1; i<=5; i++){
-            V_line(xp1-i, yp1init - 5, 82, Backcolor);
-            }  
-          }
-        }
-      else if(P1_lr){
-        for (int yp1 = 1; yp1 <= 7; yp1++){ 
-          // Revisa si se presionaba el botón del movimiento a la izquierda
-          if(P1_leftState == LOW){
-            if(xp1 > 0){
-            // Si lo hacía disminuye la posición en x
-            xp1-=5;
-            }
-          }
-          delay(25);
-          // Para animaciones 3, 4 y 5 se sube la posición en y
-          if((yp1 == 3) || (yp1 == 4) ||(yp1 == 5)){
-            LCD_Sprite(xp1, yp1init - yp1*2, 40, 77, Scorpion_Jumping, 7, yp1, 1, 0);
-            }
-          else{
-            LCD_Sprite(xp1, yp1init, 40, 77, Scorpion_Jumping, 7, yp1, 1, 0);
-            }
-          // Dibuja la línea que borra el rastro del jugador
-          for (int i = 39; i <= 43; i++){
-            V_line(xp1+i, yp1init - 5, 82, Backcolor);
-            }
-        }
-      }
-    }
-  
-//  if(P1_downState == LOW){
-//    // Revisa si el jugador se dirigía a la izquierda o derecha
-//    if (!P1_lr){
-//        delay(15);
-//        // En las animaciones 3, 4 y 5 incrementa también la posición en y
-//        LCD_Sprite(xp1, yp1init, 40, 77, Scorpion_Jumping, 7, 1, 0, 0);
-//        // Dibuja la línea que borra el rastro del jugador
-//        V_line(xp1-1, yp1init, 77, Backcolor);
-//        V_line(xp1+40, yp1init, 77, Backcolor);   
-//        }
-//      }
-
-
   }
 }
 
@@ -346,52 +240,55 @@ void mapeo_SD(char document[], int width, int height, int x0, int y0){
   }
 
 void checkbuttonP1(void){
-  P1serial = Serial2.read();
-  if(P1serial == 1){
-    P1_leftState = LOW;
+  while(Serial2.available()){
+    P1serial = Serial2.read();
+    switch(P1serial){
+      case 1:
+        P1_leftState = LOW;
+        break;
+      case 2:
+        P1_upState = LOW;
+        break;
+      case 3:
+        P1_rightState = LOW;
+        break;
+      case 6:
+        P1_leftState = HIGH;
+        P1_rightState = HIGH;
+        P1_upState = HIGH;
+        break;
+      }
     }
-  if(P1serial == 2){
-    P1_upState = LOW;
-    }
-  if(P1serial == 3){
-    P1_rightState = LOW;
-    }
-  if(P1serial == 4){
-    
-    }
-  if(P1serial == 6){
-    P1_leftState = HIGH;
-    P1_rightState = HIGH;
-    P1_upState = HIGH;
-    P1_downState = HIGH;
-    }
-  }
-
-void portada(){
-  //se realiza la animación de la pantalla. 
-  
-  
-  //delay(200);
 }
 
+
 void PICscorpion(){
-  Rect(86, 96, 50, 50, 0x075b);
+  Rect(86, 106, 50, 50, 0x075b);
 }
 
 void PICsubzero(){
-  Rect(196, 96, 50, 50, 0x075b);
+  Rect(196, 106, 50, 50, 0x075b);
 }
 
-////////////////////////////////////////////////////////////////
-//Verificación de posición y movimiento de personajes
-/////////////////////////////////////////////////////////////////
-void verifposP1(){
+
+void P1selection(){
+  checkbuttonP1();
+  if (P1_leftState == LOW){
+    posP1--;
+  }
+  else if (P1_rightState == LOW){
+    posP1++;
+  }
+  else if (P1_upState == LOW){
+    P1done = 1;
+  }
+
   if (posP1 == 1){ //pos SCORPION
-      Rect(196, 96, 50, 50, 0x0000);
+      Rect(196, 106, 50, 50, 0x0000);
       PICscorpion();
     }
   else if (posP1 == 2){ //pos SUBZERO
-    Rect(86, 96, 50, 50, 0x0000);
+    Rect(86, 106, 50, 50, 0x0000);
     PICsubzero();
     }
   else if (posP1 > 2){
@@ -402,61 +299,138 @@ void verifposP1(){
   }
 }
 
-void eleccionP1(){
-  
-  checkbuttonP1();
-  if (P1_leftState == LOW){
-    posP1--;
-    delay(100);
-  }
-  else if (P1_rightState == LOW){
-    posP1++;
-    delay(100);
-  }
-  else if (P1_upState == LOW){
-    P1done = 1;
-  }
-}
-
-
-//////////////////
-void verifposP2(){
+void P2selection(){
   
   if (posP1 == 1){ //pos SCORPION
       //Rect(196, 96, 50, 50, 0x0000);
-    LCD_Bitmap(90, 100, 44, 44, scorpionpic);
-    LCD_Bitmap(200, 100, 44, 44, subzeropic);
+    LCD_Bitmap(90, 110, 44, 44, scorpionpic);
+    LCD_Bitmap(200, 110, 44, 44, subzeropic);
     //PICscorpion();
     int eleccionP1 = 1;
     int eleccionP2 = 2;
     }
   else if (posP1 == 2){ //pos SUBZERO
-        Rect(196, 96, 50, 50, 0x0000);
-        Rect(86, 96, 50, 50, 0x0000);
-        LCD_Bitmap(200, 100, 44, 44, scorpionpic);
-        LCD_Bitmap(90, 100, 44, 44, subzeropic);
+        Rect(196, 106, 50, 50, 0x0000);
+        Rect(86, 106, 50, 50, 0x0000);
+        LCD_Bitmap(200, 110, 44, 44, scorpionpic);
+        LCD_Bitmap(90, 110, 44, 44, subzeropic);
         int eleccionP1 = 2;
         int eleccionP2 = 1;
     }
 }
 
-//void saveImage(char doc[]){
-//  myFile = SD.open(doc, FILE_READ);
-//  unsigned char data[76800];
-//  int bytesRead = myFile.read(data, 76800);
-//  
-//  //const unsigned char* dataStored = data;
-//  //PROGMEM const unsigned char* dataPointer = dataStored;
-//  
-//  LCD_Bitmap(0, 0, 320, 210, data);
-////  if(myFile){
-////    while(myFile.available()){
-////      Image[poschar] = myFile.read();
-////      Serial.write(Image[poschar]);
-////      //Serial.println(myFile.read());
-////      poschar++;
-////    }
-////    Serial.println("Se guardó el archivo");
-////    myFile.close();
-////    }
-//}
+void Playermov(int* rightStatep, int* leftStatep, int* upStatep, boolean* lrp, uint8_t Walking[], uint8_t Jumping[], int* xpp, int ypinit){
+
+  int rightState = *rightStatep;
+  int leftState = *leftStatep;
+  int upState = *upStatep;
+  boolean lr = *lrp;
+  int xp = *xpp;
+  
+    if(rightState == LOW){
+      lr = 0;
+      // Si superó el límite se queda en esa coordenada
+      if(xp >= 280){
+        xp = 280;
+        // Animación del borde de la pantalla
+        delay(15);
+        LCD_Sprite(xp, ypinit, 39, 77, Walking, 5, 3, 0, 0);
+        delay(15);
+        LCD_Sprite(xp, ypinit, 39, 77, Walking, 5, 5, 0, 0);
+        }
+      else{
+        xp += 5;
+        }
+      delay(15);
+      // Relleno de la parte que va dejando el jugador
+      for(int i = 1; i<=5; i++){
+        V_line(xp-i, ypinit - 1, 77, Backcolor);
+      }
+      // Animación del jugador
+      int anim1 = (xp/17)%5;
+      LCD_Sprite(xp, ypinit, 39, 77, Walking, 5, anim1, 0, 0);
+    }
+  
+    // Revisa si se presionó el control izquierdo del jugador 1
+    if(leftState == LOW){
+      lr = 1;          // Dirección izquierda
+      // Revisa si llegó al borde de la pantalla
+      if(xp <= 0){
+        xp = 0;
+        // Animación en el borde de la pantalla
+        delay(15);
+        LCD_Sprite(xp, ypinit, 39, 77, Walking, 5, 3, 1, 0);
+        delay(15);
+        LCD_Sprite(xp, ypinit, 39, 77, Walking, 5, 5, 1, 0);
+        }
+      else{
+        xp -= 5;
+        }
+  
+      delay(15);
+      // Relleno para el rastro que deja el jugador
+      for (int i = 39; i <= 43; i++){
+      V_line(xp+i, ypinit - 1, 77, Backcolor);
+      }
+      // Animación del jugador 1
+      int anim1 = (xp1/17)%5;
+      LCD_Sprite(xp, ypinit, 39, 77, Walking, 5, anim1, 1, 0);
+      
+      }
+  
+    // Revisa si presionó el botón de salto del jugador 1
+    if(upState == LOW){
+      int anim1y;
+      // Revisa si el jugador se dirigía a la izquierda o derecha
+      if (!lr){
+        // Incrementa variable para la animación
+        for (int yp = 1; yp <= 7; yp++){ 
+          // Revisa si al mismo tiempo se presionó el botón del movimiento a la deracha
+          if(rightState == LOW){
+            // Si lo hizo entonces también aumenta la coordenada en xp1
+            if(xp < 280){
+            xp+=5;
+            }
+          }
+          delay(25);
+          // En las animaciones 3, 4 y 5 incrementa también la posición en y
+          if((yp == 3) || (yp == 4) ||(yp == 5)){
+            LCD_Sprite(xp, ypinit - yp*2, 40, 77, Jumping, 7, yp, 0, 0);
+            }
+          else{
+            LCD_Sprite(xp, ypinit, 40, 77, Jumping, 7, yp, 0, 0);
+            }
+          // Dibuja la línea que borra el rastro del jugador
+          for(int i = 1; i<=5; i++){
+            V_line(xp-i, ypinit - 5, 82, Backcolor);
+            }  
+          }
+        }
+      else if(lr){
+        for (int yp = 1; yp <= 7; yp++){ 
+          // Revisa si se presionaba el botón del movimiento a la izquierda
+          if(leftState == LOW){
+            if(xp > 0){
+            // Si lo hacía disminuye la posición en x
+            xp-=5;
+            }
+          }
+          delay(25);
+          // Para animaciones 3, 4 y 5 se sube la posición en y
+          if((yp == 3) || (yp == 4) ||(yp == 5)){
+            LCD_Sprite(xp, ypinit - yp*2, 40, 77, Jumping, 7, yp, 1, 0);
+            }
+          else{
+            LCD_Sprite(xp, ypinit, 40, 77, Jumping, 7, yp, 1, 0);
+            }
+          // Dibuja la línea que borra el rastro del jugador
+          for (int i = 39; i <= 43; i++){
+            V_line(xp+i, ypinit - 5, 82, Backcolor);
+            }
+        }
+      }
+    }
+    
+    *lrp = lr;
+    *xpp = xp;
+  }
