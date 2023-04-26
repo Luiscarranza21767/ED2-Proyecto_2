@@ -25,10 +25,6 @@
 #include "driverlib/timer.h"
 #include <avr/pgmspace.h>
 
-#define P1_left PC_7
-#define P1_up PC_6
-#define P1_down PC_5
-#define P1_right PC_4
 
 #define SD_CS PB_6
 const int Backcolor = 0x28c3;
@@ -42,9 +38,11 @@ const int yp1init = 95;
 //#define LCD_DC PD_1
 //#define LCD_CS PA_3
 
+// Variables para jugador 1
 int* P1_leftStatep;
 int* P1_upStatep;
 int* P1_rightStatep;
+int* P1_hitStatep;
 
 int* xp1p;
 boolean* P1_lrp;                   // Variable para comparar dirección de p1 (1-left 0-right)
@@ -52,8 +50,26 @@ boolean* P1_lrp;                   // Variable para comparar dirección de p1 (1
 int P1_leftState = 1;
 int P1_upState = 1;
 int P1_rightState = 1;
+int P1_hitState = 1;
 int xp1 = 0;
 boolean P1_lr = 0;
+
+// Variables para jugador 2
+int* P2_leftStatep;
+int* P2_upStatep;
+int* P2_rightStatep;
+int* P2_hitStatep;
+
+int* xp2p;
+boolean* P2_lrp;                   // Variable para comparar dirección de p1 (1-left 0-right)
+
+int P2_leftState = 1;
+int P2_upState = 1;
+int P2_rightState = 1;
+int P2_hitState = 1;
+int xp2 = 280;
+boolean P2_lr = 0;
+
 
 int iniciomenu = 0;
 int elegirmenu = 0;
@@ -61,20 +77,27 @@ int posP2 = 0;
 int posP1 = 0;
 int P1done = 0;
 int P2done = 0;
+int song = 0;
 
 
 File myFile;
 int P1serial;
+int P2serial;
 int asciitohex(int val);
 void mapeo_SD(char document[], int width, int height, int x0, int y0);
 void checkbuttonP1(void);
-void saveImage(char doc[]);
-void Playermov(int* rightStatep, int* leftStatep, int* upStatep, boolean* lrp, uint8_t Walking[], uint8_t Jumping[], int* xpp, int ypinit);
+void checkbuttonP2(void);
+void Playermov(int* rightStatep, int* leftStatep, int* upStatep, int* hitStatep, boolean* lrp, uint8_t Walking[], uint8_t Jumping[], uint8_t Hitting[], int* xpp, int ypinit);
 
 extern uint8_t flecha[];
 extern uint8_t Scorpion_Walking[];
 extern uint8_t Scorpion_Jumping[];
-  
+extern uint8_t Scorpion_Hitting[];
+
+extern uint8_t Subzero_Walking[];
+extern uint8_t Subzero_Jumping[];
+extern uint8_t Subzero_Hitting[];
+
 //***************************************************************************************************************************************
 // Inicialización
 //***************************************************************************************************************************************
@@ -87,30 +110,27 @@ void setup() {
   P1_rightStatep = &P1_rightState;
   xp1p = &xp1;
   P1_lrp = &P1_lr;                   // Variable para comparar dirección de p1 (1-left 0-right)
-  
-  pinMode(P1_left, INPUT_PULLUP);
-  pinMode(P1_up, INPUT_PULLUP);
-  pinMode(P1_down, INPUT_PULLUP);
-  pinMode(P1_right, INPUT_PULLUP);
+
+  P2_leftStatep = &P2_leftState;
+  P2_upStatep = &P2_upState;
+  P2_rightStatep = &P2_rightState;
+  xp2p = &xp2;
+  P2_lrp = &P2_lr;                   // Variable para comparar dirección de p2 (1-left 0-right)
 
   // Iniciar la comunicación serial
   Serial.begin(9600);
-  SPI.setModule(0);
-  Serial.print("Inicializando la tarjeta SD");
-  pinMode(SD_CS, OUTPUT);
-  if(!SD.begin(SD_CS)){
-    Serial.println("Inicialización fallida");
-    return;
-    }
-    Serial.println("Inicialización completa");
   Serial2.begin(9600);
-  // Iniciar la comunicación con la pantalla
+  Serial3.begin(9600);
+  SPI.setModule(0);
+  pinMode(SD_CS, OUTPUT);
+  SD.begin(SD_CS);
+  
   LCD_Init();
   LCD_Clear(0x00);
   delay(500);
-
-//  saveImage("InitMen.txt");
-  
+  song = 1;
+  Serial2.write(song);
+  Serial2.flush();
   mapeo_SD("InitMen.txt", 320, 210, 0, 0);
   // Dibujar el fondo del juego (Ignorar el nombre xd)
 //  
@@ -154,12 +174,25 @@ void loop() {
     elegirmenu = 0;
     delay(1000);
   }
+  song = 2;
+  Serial2.write(song);
+  Serial2.flush();
   LCD_Clear(0x00);
   mapeo_SD("BackGam.txt", 320, 240, 0, 0);
   while (1){
-    checkbuttonP1();  
-    Playermov(&P1_rightState, &P1_leftState, &P1_upState, &P1_lr, Scorpion_Walking, Scorpion_Jumping, &xp1, yp1init);
-    
+    switch(posP1){
+      case 1:
+        checkbuttonP1();  
+        Playermov(&P1_rightState, &P1_leftState, &P1_upState, &P1_hitState, &P1_lr, Scorpion_Walking, Scorpion_Jumping, Scorpion_Hitting, &xp1, yp1init);
+        checkbuttonP2();
+        Playermov(&P2_rightState, &P2_leftState, &P2_upState, &P2_hitState, &P2_lr, Subzero_Walking, Subzero_Jumping, Subzero_Hitting, &xp2, yp1init);
+        break;
+      case 2:
+        checkbuttonP1();  
+        Playermov(&P1_rightState, &P1_leftState, &P1_upState, &P1_hitState, &P1_lr, Subzero_Walking, Subzero_Jumping, Subzero_Hitting, &xp1, yp1init);
+        checkbuttonP2();
+        Playermov(&P2_rightState, &P2_leftState, &P2_upState, &P2_hitState, &P2_lr, Scorpion_Walking, Scorpion_Jumping, Scorpion_Hitting, &xp2, yp1init);
+    }
   }
 }
 
@@ -234,9 +267,9 @@ void mapeo_SD(char document[], int width, int height, int x0, int y0){
       myFile.close();
     }
   else{
-    Serial.println("No se pudo abrir la imagen");
+    //Serial.println("No se pudo abrir la imagen");
     myFile.close();
-      } 
+    }
   }
 
 void checkbuttonP1(void){
@@ -252,10 +285,42 @@ void checkbuttonP1(void){
       case 3:
         P1_rightState = LOW;
         break;
+      case 4:
+        P1_hitState = LOW;
+        break;
+        
       case 6:
         P1_leftState = HIGH;
         P1_rightState = HIGH;
         P1_upState = HIGH;
+        P1_hitState = HIGH;
+        break;
+      }
+    }
+}
+
+void checkbuttonP2(void){
+  while(Serial3.available()){
+    P2serial = Serial3.read();
+    switch(P2serial){
+      case 1:
+        P2_leftState = LOW;
+        break;
+      case 2:
+        P2_upState = LOW;
+        break;
+      case 3:
+        P2_rightState = LOW;
+        break;
+      case 4:
+        P2_hitState = LOW;
+        break;
+        
+      case 6:
+        P2_leftState = HIGH;
+        P2_rightState = HIGH;
+        P2_upState = HIGH;
+        P2_hitState = HIGH;
         break;
       }
     }
@@ -306,24 +371,25 @@ void P2selection(){
     LCD_Bitmap(90, 110, 44, 44, scorpionpic);
     LCD_Bitmap(200, 110, 44, 44, subzeropic);
     //PICscorpion();
-    int eleccionP1 = 1;
-    int eleccionP2 = 2;
+//    int eleccionP1 = 1;
+//    int eleccionP2 = 2;
     }
   else if (posP1 == 2){ //pos SUBZERO
         Rect(196, 106, 50, 50, 0x0000);
         Rect(86, 106, 50, 50, 0x0000);
         LCD_Bitmap(200, 110, 44, 44, scorpionpic);
         LCD_Bitmap(90, 110, 44, 44, subzeropic);
-        int eleccionP1 = 2;
-        int eleccionP2 = 1;
+//        int eleccionP1 = 2;
+//        int eleccionP2 = 1;
     }
 }
 
-void Playermov(int* rightStatep, int* leftStatep, int* upStatep, boolean* lrp, uint8_t Walking[], uint8_t Jumping[], int* xpp, int ypinit){
+void Playermov(int* rightStatep, int* leftStatep, int* upStatep, int* hitStatep, boolean* lrp, uint8_t Walking[], uint8_t Jumping[], uint8_t Hitting[], int* xpp, int ypinit){
 
   int rightState = *rightStatep;
   int leftState = *leftStatep;
   int upState = *upStatep;
+  int hitState = *hitStatep;
   boolean lr = *lrp;
   int xp = *xpp;
   
@@ -346,6 +412,7 @@ void Playermov(int* rightStatep, int* leftStatep, int* upStatep, boolean* lrp, u
       for(int i = 1; i<=5; i++){
         V_line(xp-i, ypinit - 1, 77, Backcolor);
       }
+      
       // Animación del jugador
       int anim1 = (xp/17)%5;
       LCD_Sprite(xp, ypinit, 39, 77, Walking, 5, anim1, 0, 0);
@@ -369,7 +436,7 @@ void Playermov(int* rightStatep, int* leftStatep, int* upStatep, boolean* lrp, u
   
       delay(15);
       // Relleno para el rastro que deja el jugador
-      for (int i = 39; i <= 43; i++){
+      for (int i = 39; i <= 53; i++){
       V_line(xp+i, ypinit - 1, 77, Backcolor);
       }
       // Animación del jugador 1
@@ -430,7 +497,39 @@ void Playermov(int* rightStatep, int* leftStatep, int* upStatep, boolean* lrp, u
         }
       }
     }
-    
+    if(hitState == LOW){
+      if(!lr){
+        LCD_Sprite(xp, ypinit, 57, 77, Hitting, 3, 0, 0, 0);
+        delay(25);
+        LCD_Sprite(xp, ypinit, 57, 77, Hitting, 3, 1, 0, 0);
+        delay(25);
+        LCD_Sprite(xp, ypinit, 57, 77, Hitting, 3, 2, 0, 0);
+        delay(25);
+        for(int i = 1; i<=7; i++){
+          V_line(xp-i, ypinit - 1, 77, Backcolor);
+          }
+        for(int i = 1; i<=20; i++){
+          V_line(xp+35, ypinit - 1, 77, Backcolor);
+          }
+        }
+        
+      else{
+        LCD_Sprite(xp, ypinit, 57, 77, Hitting, 3, 0, 1, 0);
+        delay(25);
+        LCD_Sprite(xp, ypinit, 57, 77, Hitting, 3, 1, 1, 0);
+        delay(25);
+        LCD_Sprite(xp, ypinit, 57, 77, Hitting, 3, 2, 1, 0);
+        delay(25);
+        for(int i = 1; i<=10; i++){
+          V_line(xp-i, ypinit - 1, 77, Backcolor);
+          }
+        for(int i = 1; i<=7; i++){
+          V_line(xp+55, ypinit - 1, 77, Backcolor);
+          }
+        }
+      
+        
+      }
     *lrp = lr;
     *xpp = xp;
   }
