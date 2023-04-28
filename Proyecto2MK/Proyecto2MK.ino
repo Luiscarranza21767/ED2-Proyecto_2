@@ -1,11 +1,12 @@
 //***************************************************************************************************************************************
-/* Librería para el uso de la pantalla ILI9341 en modo SPI
- * Basado en el código de martinayotte - https://www.stm32duino.com/viewtopic.php?t=637
- * Adaptación, migración y creación de nuevas funciones: Pablo Mazariegos y José Morales
- * Con ayuda de: José Guerra
- * Adaptación del ejemplo a librería: Luis Pablo Carranza
- * IE3027: Electrónica Digital 2 - 2023
- * Laboratorio 7 Luis Pablo Carranza
+/* Universidad del Valle de Guatemala
+ *  Proyecto de Electrónica Digital 2
+ *  Video Juego 
+ *  Mortal Kombat 
+ *  Autores: Luis Pablo Carranza y Miguel Chacón
+ *  Fecha de creación: 31/3/2023
+ *  Última actualización: 27/04/2023
+ *  
  */
 //***************************************************************************************************************************************
 #include <stdint.h>
@@ -51,7 +52,7 @@ int* P1_lifep;
 int* xp1p;
 boolean* P1_lrp;                   
 
-// Variables 
+// Variables para guardar un espacio para las tipo puntero
 int P1_leftState = 1;
 int P1_upState = 1;
 int P1_rightState = 1;
@@ -60,16 +61,18 @@ int P1_life = 108;
 int xp1 = 0;
 boolean P1_lr = 0;
 
-// Variables para jugador 2
+// Variables para el movimiento del jugador 2
 int* P2_leftStatep;
 int* P2_upStatep;
 int* P2_rightStatep;
 int* P2_hitStatep;
 int* P2_lifep;
 
+// Variables para control horizontal y de dirección del jugador 2 (P2_lrp; 0 = derecha, 1 = izquierda)
 int* xp2p;
 boolean* P2_lrp;                   // Variable para comparar dirección de p1 (1-left 0-right)
 
+// Variables para guardar un espacio para las tipo puntero
 int P2_leftState = 1;
 int P2_upState = 1;
 int P2_rightState = 1;
@@ -79,19 +82,25 @@ int xp2 = 280;
 boolean P2_lr = 0;
 
 
+// Variables para el menú y elección de los jugadores
 int iniciomenu = 0;
 int elegirmenu = 0;
 int posP2 = 0;
 int posP1 = 0;
 int P1done = 0;
 int P2done = 0;
+// Variable para el ciclo del juego
+int Game = 1;
+
+// Variable para el control de las canciones del juego
 int song = 0;
 
-
 File myFile;
+
+// 
 int P1serial;
 int P2serial;
-int Game = 1;
+
 int asciitohex(int val);
 void mapeo_SD(char document[], int width, int height, int x0, int y0);
 void checkbuttonP1(void);
@@ -156,6 +165,7 @@ void setup() {
   
   mapeo_SD("InitMen.txt", 320, 210, 0, 0);
   mapeo_SD("2pgame.txt", 98, 8, 120, 210);
+  
   delay(100);
   //LCD_Clear(0x00);
   LCD_Sprite(108, 208, 10, 10, flecha, 2, 0, 0, 1);
@@ -231,9 +241,11 @@ void loop() {
     switch(posP1){
       case 1:
         checkbuttonP1();  
-        Playermov(&P1_rightState, &P1_leftState, &P1_upState, &P1_hitState, &P1_lr, Scorpion_Walking, Scorpion_Jumping, Scorpion_Hitting, Subzero_Walking, &xp1, yp1init, &xp2, &P2_life, 1);
+        Playermov(&P1_rightState, &P1_leftState, &P1_upState, &P1_hitState, &P1_lr, Scorpion_Walking, 
+        Scorpion_Jumping, Scorpion_Hitting, Subzero_Walking, &xp1, yp1init, &xp2, &P2_life, 1);
         checkbuttonP2();
-        Playermov(&P2_rightState, &P2_leftState, &P2_upState, &P2_hitState, &P2_lr, Subzero_Walking, Subzero_Jumping, Subzero_Hitting, Scorpion_Walking, &xp2, yp1init, &xp1, &P1_life, 2);
+        Playermov(&P2_rightState, &P2_leftState, &P2_upState, &P2_hitState, &P2_lr, Subzero_Walking, 
+        Subzero_Jumping, Subzero_Hitting, Scorpion_Walking, &xp2, yp1init, &xp1, &P1_life, 2);
         if ((life2 <= 0) || (life1 <= 0)){
           if (life2 <= 0){
             GameOver(Scorpion_Win, Subzero_Lose, &xp1, &xp2, yp1init, 1);
@@ -254,9 +266,11 @@ void loop() {
         break;
       case 2:
         checkbuttonP1();  
-        Playermov(&P1_rightState, &P1_leftState, &P1_upState, &P1_hitState, &P1_lr, Subzero_Walking, Subzero_Jumping, Subzero_Hitting, Scorpion_Walking, &xp1, yp1init, &xp2, &P2_life, 1);
+        Playermov(&P1_rightState, &P1_leftState, &P1_upState, &P1_hitState, &P1_lr, Subzero_Walking, 
+        Subzero_Jumping, Subzero_Hitting, Scorpion_Walking, &xp1, yp1init, &xp2, &P2_life, 1);
         checkbuttonP2();
-        Playermov(&P2_rightState, &P2_leftState, &P2_upState, &P2_hitState, &P2_lr, Scorpion_Walking, Scorpion_Jumping, Scorpion_Hitting, Subzero_Walking, &xp2, yp1init, &xp1, &P1_life, 2);
+        Playermov(&P2_rightState, &P2_leftState, &P2_upState, &P2_hitState, &P2_lr, Scorpion_Walking, 
+        Scorpion_Jumping, Scorpion_Hitting, Subzero_Walking, &xp2, yp1init, &xp1, &P1_life, 2);
         if ((life2 <= 0) || (life1 <= 0)){
           if (life2 <= 0){
             GameOver(Subzero_Win, Scorpion_Lose, &xp1, &xp2, yp1init, 1);
